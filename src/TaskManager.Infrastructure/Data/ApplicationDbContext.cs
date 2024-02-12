@@ -19,6 +19,7 @@ namespace TaskManager.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            builder.SeedStatusData();
 
             base.OnModelCreating(builder);
         }
