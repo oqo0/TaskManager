@@ -13,6 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Infrastructure"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Application", "src\TaskManager.Application\TaskManager.Application.csproj", "{9F4496AB-D683-43A6-A1F9-5A41BA62F5C9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8B512159-0E09-49FD-ADD1-E2C33D614235}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		Dockerfile = Dockerfile
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
