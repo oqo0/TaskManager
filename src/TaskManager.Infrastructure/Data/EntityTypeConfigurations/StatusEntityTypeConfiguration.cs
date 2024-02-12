@@ -15,6 +15,8 @@ namespace TaskManager.Infrastructure.Data.EntityTypeConfigurations
                 .HasKey(s => s.Id);
             builder.Property(s => s.Id)
                 .ValueGeneratedOnAdd();
+            builder.Property(s => s.Name)
+                .HasMaxLength(50);
             builder.HasMany(s => s.Tasks)
                 .WithOne(t => t.Status)
                 .HasForeignKey(t => t.StatusId);
