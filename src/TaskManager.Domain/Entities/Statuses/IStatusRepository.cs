@@ -5,7 +5,7 @@ using TaskManager.Domain.Common;
 
 namespace TaskManager.Domain.Entities.Statuses
 {
-    interface IStatusRepository : IRepository<Status, long>
+    public interface IStatusRepository : IRepository<Status, long>
     {
         public IList<Status> GetAll();
     }

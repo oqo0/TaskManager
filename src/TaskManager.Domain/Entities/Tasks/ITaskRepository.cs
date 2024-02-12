@@ -5,7 +5,7 @@ using TaskManager.Domain.Common;
 
 namespace TaskManager.Domain.Entities.Tasks
 {
-    interface ITaskRepository : IRepository<Task, long>
+    public interface ITaskRepository : IRepository<Task, long>
     {
         public void Add(Task data);
         public IList<Task> GetAll();
