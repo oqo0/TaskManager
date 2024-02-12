@@ -4,7 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TaskManager.Domain.Entities.Statuses;
+using TaskManager.Domain.Entities.Tasks;
 using TaskManager.Infrastructure.Data;
+using TaskManager.Infrastructure.Data.Repositories;
 
 namespace TaskManager.Infrastructure
 {
@@ -28,6 +31,13 @@ namespace TaskManager.Infrastructure
             {
                 options.UseNpgsql(dbConnectionString);
             });
+
+            #endregion
+
+            #region Add repositories
+
+            services.AddScoped<IStatusRepository, StatusRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
 
             #endregion
 
