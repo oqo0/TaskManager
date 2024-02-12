@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TaskManager.Application;
 using TaskManager.Infrastructure;
 
 namespace TaskManager
@@ -23,8 +24,9 @@ namespace TaskManager
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddInfrastructureServices(Configuration);
-            services.AddControllersWithViews();
+            services.AddInfrastructureServices(Configuration)
+                .AddApplicationServices(Configuration)
+                .AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

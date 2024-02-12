@@ -11,7 +11,7 @@ namespace TaskManager.Application
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddInfrastructureServices(
+        public static IServiceCollection AddApplicationServices(
             this IServiceCollection services,
             IConfiguration configuration)
         {
