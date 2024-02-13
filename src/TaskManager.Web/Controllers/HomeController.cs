@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,8 +8,6 @@ using TaskManager.Models;
 using TaskManager.Application.Tasks;
 using TaskManager.Web.Models;
 using TaskManager.Application.Statuses;
-using FluentValidation.Results;
-using TaskManager.Models;
 
 namespace TaskManager.Controllers
 {
@@ -48,16 +44,16 @@ namespace TaskManager.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Message()
+        public ActionResult Message()
         {
-            if (TempData["MessageViewModel"] is string messageViewModelJson)
+            if (!(TempData["MessageViewModel"] is string messageViewModelJson))
             {
-                var messageViewModel = System.Text.Json.JsonSerializer.Deserialize<MessageViewModel>(messageViewModelJson);
-
-                return View(messageViewModel);
+                return RedirectToAction("Index", "Home");
             }
 
-            return View();
+            var messageViewModel = System.Text.Json.JsonSerializer.Deserialize<MessageViewModel>(messageViewModelJson);
+
+            return View(messageViewModel);
         }
 
         public async Task<IActionResult> Update(long id)
