@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TaskManager.Application.Tasks
 {
-    class DeleteTaskCommand : IRequest
+    public class DeleteTaskCommand : IRequest
     {
         public long Id { get; set; }
     }

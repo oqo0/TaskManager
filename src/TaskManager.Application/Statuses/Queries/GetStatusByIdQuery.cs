@@ -6,7 +6,7 @@ using TaskManager.Domain.Entities.Statuses;
 
 namespace TaskManager.Application.Statuses
 {
-    class GetStatusByIdQuery : IRequest<Status>
+    public class GetStatusByIdQuery : IRequest<Status>
     {
         public long Id { get; set; }
 

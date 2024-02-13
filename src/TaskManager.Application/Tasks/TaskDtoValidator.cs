@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TaskManager.Application.Tasks
 {
-    class TaskDtoValidator : AbstractValidator<TaskDto>
+    public class TaskDtoValidator : AbstractValidator<TaskDto>
     {
         public TaskDtoValidator()
         {

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TaskManager.Application.Tasks
 {
-    class TaskDto
+    public class TaskDto
     {
         public long Id { get; set; }
         public string Name { get; set; }

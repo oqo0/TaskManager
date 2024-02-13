@@ -1,8 +1,76 @@
-﻿@{
+﻿@model TaskManager.Web.Models.TasksViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-md-6 text-left">
+            <button class="btn btn-primary" onclick="location.href='@Url.Action("Add", "")'">Add</button>
+        </div>
+        <div class="col-md-6 text-right">
+            <button class="btn btn-warning" id="editButton" disabled>Edit</button>
+            <button class="btn btn-danger" id="removeButton" disabled>Remove</button>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in Model.Tasks)
+            {
+                <tr>
+                    <td><input type="radio" name="selectedTask" value="@task.Id" class="task-radio" /></td>
+                    <td>@task.Name</td>
+                    <td>@task.Description</td>
+                    <td>@task.Status.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var taskId;  // Declare taskId here
+
+            $('.task-radio').change(function () {
+                if ($(this).is(':checked')) {
+                    taskId = $(this).val();  // Now taskId is in scope
+                    $('#editButton').removeAttr('disabled').attr('onclick', "location.href='@Url.Action("Update", "")?id=' + taskId");
+                    $('#removeButton').removeAttr('disabled');
+                } else {
+                    $('#editButton').attr('disabled', 'disabled').removeAttr('onclick');
+                    $('#removeButton').attr('disabled', 'disabled');
+                }
+            });
+
+            $('#editButton').click(function () {
+                if (taskId) {
+                    location.href = '@Url.Action("Update", "")?id=' + taskId;
+                }
+            });
+
+            $('#removeButton').click(function (event) {
+                event.preventDefault();
+                if (taskId) {
+                    $.ajax({
+                        url: '@Url.Action("Remove", "")',
+                        type: 'POST',
+                        data: { id: taskId },
+                        success: function () {
+                            location.reload();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

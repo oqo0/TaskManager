@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TaskManager.Application.Tasks
 {
-    class CreateTaskCommand : IRequest
+    public class AddOrUpdateTaskCommand : IRequest
     {
         public TaskDto TaskDto { get; set; }
     }

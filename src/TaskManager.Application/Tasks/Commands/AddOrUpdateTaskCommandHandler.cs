@@ -8,25 +8,35 @@ using TaskEntities = TaskManager.Domain.Entities.Tasks;
 
 namespace TaskManager.Application.Tasks
 {
-    class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand>
+    class AddOrUpdateTaskCommandHandler : IRequestHandler<AddOrUpdateTaskCommand>
     {
         private readonly TaskEntities.ITaskRepository _taskRepository;
 
-        public CreateTaskCommandHandler(TaskEntities.ITaskRepository taskRepository)
+        public AddOrUpdateTaskCommandHandler(TaskEntities.ITaskRepository taskRepository)
         {
             _taskRepository = taskRepository;
         }
 
-        public Task<Unit> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
+        public Task<Unit> Handle(AddOrUpdateTaskCommand request, CancellationToken cancellationToken)
         {
-            var task = new TaskEntities.Task()
+            var task = _taskRepository.GetById(request.TaskDto.Id);
+
+            var newTask = new TaskEntities.Task()
             {
                 Name = request.TaskDto.Name,
                 Description = request.TaskDto.Description,
                 StatusId = request.TaskDto.StatusId
             };
 
-            _taskRepository.Add(task);
+            if (task is null)
+            {
+                _taskRepository.Add(newTask);
+            }
+            else
+            {
+                newTask.Id = task.Id;
+                _taskRepository.Update(newTask);
+            }
 
             return Task.FromResult(Unit.Value);
         }

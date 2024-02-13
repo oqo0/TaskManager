@@ -6,7 +6,7 @@ using TaskManager.Domain.Entities.Tasks;
 
 namespace TaskManager.Application.Tasks
 {
-    class GetTaskByIdQuery : IRequest<Task>
+    public class GetTaskByIdQuery : IRequest<Task>
     {
         public long Id { get; set; }
     }

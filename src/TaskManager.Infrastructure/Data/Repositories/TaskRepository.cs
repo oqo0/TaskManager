@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TaskManager.Domain.Entities.Tasks;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace TaskManager.Infrastructure.Data.Repositories
 {
@@ -18,11 +19,12 @@ namespace TaskManager.Infrastructure.Data.Repositories
         public void Add(Task data)
         {
             _dbContext.Tasks.Add(data);
+            _dbContext.SaveChanges();
         }
 
         public IList<Task> GetAll()
         {
-            return _dbContext.Tasks.ToList();
+            return _dbContext.Tasks.Include(t => t.Status).ToList();
         }
 
         public Task GetById(long id)
@@ -52,7 +54,6 @@ namespace TaskManager.Infrastructure.Data.Repositories
             task.Description = data.Description;
             task.StatusId = data.StatusId;
 
-            _dbContext.Remove(task);
             _dbContext.SaveChanges();
         }
     }

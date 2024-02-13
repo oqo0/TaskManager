@@ -1,0 +1,23 @@
+﻿@model TaskManager.Web.Models.UpdateTaskViewModel
+@{
+    ViewData["Title"] = "Add Task";
+}
+
+<form asp-action="AddOrUpdate">
+    <div class="form-group">
+        <label asp-for="TaskDto.Name"></label>
+        <input asp-for="TaskDto.Name" class="form-control" />
+        <span asp-validation-for="TaskDto.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TaskDto.Description"></label>
+        <input asp-for="TaskDto.Description" class="form-control" />
+        <span asp-validation-for="TaskDto.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TaskDto.StatusId"></label>
+        <select asp-for="TaskDto.StatusId" asp-items="@(new SelectList(ViewBag.Statuses, "Id", "Name"))" class="form-control"></select>
+        <span asp-validation-for="TaskDto.StatusId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -6,7 +6,7 @@ using TaskManager.Domain.Entities.Statuses;
 
 namespace TaskManager.Application.Statuses
 {
-    class GetAllStatusesQuery : IRequest<IList<Status>>
+    public class GetAllStatusesQuery : IRequest<IList<Status>>
     {
     }
 }

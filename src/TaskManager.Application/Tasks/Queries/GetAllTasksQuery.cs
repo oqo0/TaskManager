@@ -6,7 +6,7 @@ using TaskManager.Domain.Entities.Tasks;
 
 namespace TaskManager.Application.Tasks
 {
-    class GetAllTasksQuery : IRequest<IList<Task>>
+    public class GetAllTasksQuery : IRequest<IList<Task>>
     {
     }
 }
