@@ -2,11 +2,7 @@
 
 ### Результат
 
-<video width="720" height="420" controls>
-  <source src="assets/showcase.mp4" type="video/mp4">
-</video>
-
-![](assets/showcase.mp4)
+https://github.com/oqo0/TaskManager/blob/master/assets/showcase.mp4
 
 ### Разработать приложение по следующим требованиям:  
 
