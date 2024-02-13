@@ -41,25 +41,23 @@
         $(document).ready(function () {
             var taskId;
 
-            $('.task-radio').change(function () {
-                if ($(this).is(':checked')) {
-                    taskId = $(this).val();
-                    $('#editButton').removeAttr('disabled').attr('onclick', "location.href='@Url.Action("Update", "")?id=' + taskId");
-                    $('#removeButton').removeAttr('disabled');
-                } else {
-                    $('#editButton').attr('disabled', 'disabled').removeAttr('onclick');
-                    $('#removeButton').attr('disabled', 'disabled');
-                }
-            });
+            function enableButtons() {
+                $('#editButton').removeAttr('disabled');
+                $('#removeButton').removeAttr('disabled');
+            }
 
-            $('#editButton').click(function () {
+            function disableButtons() {
+                $('#editButton').attr('disabled', 'disabled');
+                $('#removeButton').attr('disabled', 'disabled');
+            }
+
+            function redirectToUpdate() {
                 if (taskId) {
                     location.href = '@Url.Action("Update", "")?id=' + taskId;
                 }
-            });
+            }
 
-            $('#removeButton').click(function (event) {
-                event.preventDefault();
+            function removeTask() {
                 if (taskId) {
                     $.ajax({
                         url: '@Url.Action("Remove", "")',
@@ -70,6 +68,22 @@
                         }
                     });
                 }
+            }
+
+            $('.task-radio').change(function () {
+                if ($(this).is(':checked')) {
+                    taskId = $(this).val();
+                    enableButtons();
+                } else {
+                    taskId = null;
+                    disableButtons();
+                }
+            });
+
+            $('#editButton').click(redirectToUpdate);
+            $('#removeButton').click(function (event) {
+                event.preventDefault();
+                removeTask();
             });
         });
     </script>
