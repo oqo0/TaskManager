@@ -1,0 +1,11 @@
+﻿@model TaskManager.Web.Models.MessageViewModel
+
+<div class="alert alert-danger">
+    <strong>Invalid data:</strong>
+    <ul>
+        @foreach (var error in @Model.Problems)
+        {
+            <li>@error</li>
+        }
+    </ul>
+</div>

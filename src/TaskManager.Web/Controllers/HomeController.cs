@@ -10,6 +10,8 @@ using TaskManager.Models;
 using TaskManager.Application.Tasks;
 using TaskManager.Web.Models;
 using TaskManager.Application.Statuses;
+using FluentValidation.Results;
+using TaskManager.Models;
 
 namespace TaskManager.Controllers
 {
@@ -46,6 +48,18 @@ namespace TaskManager.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Message()
+        {
+            if (TempData["MessageViewModel"] is string messageViewModelJson)
+            {
+                var messageViewModel = System.Text.Json.JsonSerializer.Deserialize<MessageViewModel>(messageViewModelJson);
+
+                return View(messageViewModel);
+            }
+
+            return View();
+        }
+
         public async Task<IActionResult> Update(long id)
         {
             var getTaskByIdQuery = new GetTaskByIdQuery() { Id = id };
@@ -66,27 +80,38 @@ namespace TaskManager.Controllers
         }
 
         [HttpPost]
-        public IActionResult Remove(long id)
+        public async Task<IActionResult> Remove(long id)
         {
             var command = new DeleteTaskCommand()
             {
                 Id = id
             };
 
-            _mediator.Send(command);
+            await _mediator.Send(command);
 
             return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
-        public IActionResult AddOrUpdate(UpdateTaskViewModel model)
+        public async Task<IActionResult> AddOrUpdate(UpdateTaskViewModel model)
         {
             var command = new AddOrUpdateTaskCommand()
             {
                 TaskDto = model.TaskDto
             };
 
-            _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if (!result.IsValid)
+            {
+                var messageViewModel = new MessageViewModel()
+                {
+                    Problems = result.Errors.Select(e => e.ErrorMessage).ToList()
+                };
+
+                TempData["MessageViewModel"] = System.Text.Json.JsonSerializer.Serialize(messageViewModel);
+                return RedirectToAction("Message", "Home");
+            }
 
             return RedirectToAction("Index", "Home");
         }

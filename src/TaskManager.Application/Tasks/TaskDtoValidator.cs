@@ -16,6 +16,7 @@ namespace TaskManager.Application.Tasks
                 .MaximumLength(50);
             RuleFor(c => c.Description)
                 .NotNull()
+                .NotEmpty()
                 .MaximumLength(255);
         }
     }

@@ -39,11 +39,11 @@
 @section Scripts {
     <script type="text/javascript">
         $(document).ready(function () {
-            var taskId;  // Declare taskId here
+            var taskId;
 
             $('.task-radio').change(function () {
                 if ($(this).is(':checked')) {
-                    taskId = $(this).val();  // Now taskId is in scope
+                    taskId = $(this).val();
                     $('#editButton').removeAttr('disabled').attr('onclick', "location.href='@Url.Action("Update", "")?id=' + taskId");
                     $('#removeButton').removeAttr('disabled');
                 } else {
