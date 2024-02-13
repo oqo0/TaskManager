@@ -2,7 +2,9 @@
 
 ### Результат
 
-https://github.com/oqo0/TaskManager/blob/master/assets/showcase.mp4
+
+https://github.com/oqo0/TaskManager/assets/51176627/8eb1a81c-23cd-44fe-bce1-7194ac4d97f7
+
 
 ### Разработать приложение по следующим требованиям:  
 
